@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Track - Report Waste Issues. Verify. Cleanup Together.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>Green Track</span>
+            </div>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#stats">Impact</a>
+                <button class="btn btn-primary" onclick="window.location.href='auth.html'">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Report Waste Issues. Verify. Cleanup Together.</h1>
+            <p class="hero-subtitle">Join citizens, volunteers, and moderators working together to keep our communities clean and green.</p>
+            <div class="hero-cta">
+                <button class="btn btn-large btn-primary" onclick="window.location.href='auth.html?action=register'">
+                    <i class="fas fa-camera"></i> Report Issue
+                </button>
+                <button class="btn btn-large btn-secondary" onclick="window.location.href='auth.html?action=register&role=volunteer'">
+                    <i class="fas fa-hands-helping"></i> Join as Volunteer
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>1. Report</h3>
+                    <p>Citizens report waste issues with photos and location details. Quick and easy submission process.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>2. Verify</h3>
+                    <p>Moderators review and verify reports, ensuring accuracy and prioritizing urgent issues.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>3. Cleanup</h3>
+                    <p>Volunteers claim tasks, complete cleanups, and upload proof. Together we make a difference!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-reports">1,250+</div>
+                    <div class="stat-label">Reports Filed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-tasks">350+</div>
+                    <div class="stat-label">Tasks Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-success">85%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-volunteers">45</div>
+                    <div class="stat-label">Active Volunteers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section class="dashboard-tabs">
+        <div class="container">
+            <h2 class="section-title">Unified Dashboard Preview</h2>
+            <p class="hero-subtitle" style="text-align:center;margin:0 auto 2rem;max-width:700px;">
+                Explore how each role experiences Green Track. Switch between live preview cards to see citizen reporting, volunteer assignment, moderator tools, and admin analytics in action.
+            </p>
+            <div class="preview-tabs">
+                <button class="preview-tab active" data-target="preview-citizen">Citizen</button>
+                <button class="preview-tab" data-target="preview-volunteer">Volunteer</button>
+                <button class="preview-tab" data-target="preview-moderator">Moderator</button>
+                <button class="preview-tab" data-target="preview-admin">Admin</button>
+            </div>
+            <div class="preview-panel active" id="preview-citizen">
+                <h3>Citizen View</h3>
+                <p>Submit new reports, track statuses, and see updates once cleanups are complete. Real-time status badges keep citizens informed.</p>
+                <div class="card-grid" style="margin-top:1.5rem;">
+                    <div class="card">
+                        <h4>My Reports</h4>
+                        <div class="hotspot-item">
+                            <div>
+                                <strong>Plastic Waste</strong>
+                                <p style="font-size:0.9rem;color:var(--muted);">Central Park Entrance</p>
+                            </div>
+                            <span class="status-badge status-in_progress">In Progress</span>
+                        </div>
+                        <div class="hotspot-item">
+                            <div>
+                                <strong>Organic Waste</strong>
+                                <p style="font-size:0.9rem;color:var(--muted);">Market Square</p>
+                            </div>
+                            <span class="status-badge status-completed">Completed</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>Next Actions</h4>
+                        <p style="color:var(--muted);">Upload a photo, describe the issue, and submit. Moderators keep you updated!</p>
+                        <button class="btn btn-primary" onclick="window.location.href='report.html'">Submit Report</button>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-panel" id="preview-volunteer">
+                <h3>Volunteer View</h3>
+                <p>Browse available tasks near you, claim, track progress, and upload proof photos after cleanup.</p>
+                <div class="card-grid" style="margin-top:1.5rem;">
+                    <div class="card">
+                        <h4>Available Tasks</h4>
+                        <div class="hotspot-item">
+                            <div>
+                                <strong>Illegal Dumping</strong>
+                                <p style="font-size:0.9rem;color:var(--muted);">Downtown Alley</p>
+                            </div>
+                            <span class="badge">High Priority</span>
+                        </div>
+                        <button class="btn btn-secondary" style="width:100%;margin-top:1rem;">Claim Task</button>
+                    </div>
+                    <div class="card">
+                        <h4>Progress Board</h4>
+                        <p style="color:var(--muted);">Track tasks you've claimed. Update statuses to In Progress or Completed with one click.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-panel" id="preview-moderator">
+                <h3>Moderator View</h3>
+                <p>Moderators verify reports, assign volunteers, and add notes to keep operations aligned.</p>
+                <div class="card-grid" style="margin-top:1.5rem;">
+                    <div class="card">
+                        <h4>Pending Queue</h4>
+                        <div class="hotspot-item">
+                            <div>
+                                <strong>Hazardous Waste</strong>
+                                <p style="font-size:0.9rem;color:var(--muted);">Playground</p>
+                            </div>
+                            <span class="status-badge status-pending">Pending</span>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%;margin-top:1rem;">Review Report</button>
+                    </div>
+                    <div class="card">
+                        <h4>Assignment Panel</h4>
+                        <p style="color:var(--muted);">Assign verified reports to top volunteers and prioritize urgent cases.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-panel" id="preview-admin">
+                <h3>Admin Analytics</h3>
+                <p>Admins see system-wide statistics, volunteer participation, and location hotspots for proactive planning.</p>
+                <div class="stats-grid" style="margin-top:1.5rem;">
+                    <div class="stat-card">
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-label">Total Reports</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">45</div>
+                        <div class="stat-label">Active Volunteers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Hotspot Areas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Join our community and help keep your neighborhood clean and green.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-large btn-primary" onclick="window.location.href='auth.html?action=register'">
+                    Report an Issue
+                </button>
+                <button class="btn btn-large btn-outline" onclick="window.location.href='auth.html'">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Green Track. Making communities cleaner, together.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Track | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>Green Track Dashboard</span>
+            </div>
+            <div class="nav-links">
+                <span id="user-info" style="font-weight:600;"></span>
+                <button class="btn btn-outline" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="dashboard-header">
+            <div>
+                <h1>Unified Waste Management Hub</h1>
+                <p style="color: var(--muted);">Citizen reports, moderator verification, and volunteer cleanups synced in real time.</p>
+            </div>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-role="citizen">Citizen</button>
+                <button class="tab-button" data-role="volunteer">Volunteer</button>
+                <button class="tab-button" data-role="moderator">Moderator</button>
+                <button class="tab-button" data-role="admin">Admin</button>
+            </div>
+        </div>
+        <div id="dashboard-alert"></div>
+
+        <section id="citizen-section" class="tab-content active">
+            <div class="card-grid">
+                    <div class="card">
+                    <div class="dashboard-card-title">
+                        <h3>Submit Report</h3>
+                        <p style="color: var(--muted);">Upload photos, location, and severity.</p>
+                    </div>
+                    <form id="report-form">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="report-category" class="form-control">
+                                <option value="Plastic Waste">Plastic Waste</option>
+                                <option value="Litter">Litter</option>
+                                <option value="Organic Waste">Organic Waste</option>
+                                <option value="Hazardous Waste">Hazardous Waste</option>
+                                <option value="Illegal Dumping">Illegal Dumping</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="report-description" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="report-location" class="form-control" required>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group" style="flex: 1;">
+                                <label>Latitude (optional)</label>
+                                <input type="number" step="any" id="report-latitude" class="form-control">
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Longitude (optional)</label>
+                                <input type="number" step="any" id="report-longitude" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Severity</label>
+                            <select id="report-severity" class="form-control">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Photo</label>
+                            <input type="file" id="report-photo" class="form-control" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" id="report-anonymous"> Submit anonymously</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Report</button>
+                    </form>
+                </div>
+                    <div class="card">
+                    <div class="dashboard-card-title">
+                        <h3>My Reports</h3>
+                        <p style="color: var(--muted);">Track statuses and updates.</p>
+                    </div>
+                    <div id="my-reports"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="volunteer-section" class="tab-content">
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Available Tasks</h3>
+                    <p style="color: var(--muted);">Search nearby reports and claim open cleanups.</p>
+                    <div class="form-group">
+                        <input type="text" id="available-search" class="form-control" placeholder="Search by location or description">
+                    </div>
+                    <div id="available-tasks"></div>
+                </div>
+                <div class="card">
+                    <h3>My Active Tasks</h3>
+                    <p style="color: var(--muted);">Update status, upload proof, and add cleanup notes.</p>
+                    <div id="my-tasks"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="moderator-section" class="tab-content">
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Pending Reports</h3>
+                    <p style="color: var(--muted);">Review evidence, leave notes, and validate before assignment.</p>
+                    <div id="pending-reports"></div>
+                </div>
+                <div class="card">
+                    <h3>Assign Task</h3>
+                    <form id="assign-form">
+                        <div class="form-group">
+                            <label>Report ID</label>
+                            <input type="number" id="assign-report-id" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Volunteer</label>
+                            <select id="assign-volunteer-id" class="form-control" required>
+                                <option value="" disabled selected>Choose volunteer</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Assign</button>
+                    </form>
+                </div>
+                <div class="card">
+                    <h3>Global Task List</h3>
+                    <form id="task-filter-form" class="form-inline" style="margin-bottom:1rem;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Status</label>
+                            <select id="filter-status" class="form-control">
+                                <option value="">All</option>
+                                <option value="pending">Pending</option>
+                                <option value="assigned">Assigned</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Category</label>
+                            <select id="filter-category" class="form-control">
+                                <option value="">All</option>
+                                <option value="Plastic Waste">Plastic Waste</option>
+                                <option value="Litter">Litter</option>
+                                <option value="Organic Waste">Organic Waste</option>
+                                <option value="Hazardous Waste">Hazardous Waste</option>
+                                <option value="Illegal Dumping">Illegal Dumping</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:2;">
+                            <label>Search</label>
+                            <input type="text" id="filter-query" class="form-control" placeholder="Location or description">
+                        </div>
+                        <div class="form-group" style="flex:0;">
+                            <label style="visibility:hidden;">Apply</label>
+                            <button type="submit" class="btn btn-secondary">Apply</button>
+                        </div>
+                    </form>
+                    <div id="global-tasks"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-section" class="tab-content">
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Analytics</h3>
+                    <div class="stats-grid" id="admin-stats"></div>
+                </div>
+                <div class="card">
+                    <h3>Hotspots</h3>
+                    <ul class="hotspot-list" id="admin-hotspots"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+
