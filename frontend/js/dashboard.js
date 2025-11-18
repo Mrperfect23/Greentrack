@@ -251,6 +251,7 @@ const renderPendingReports = (reports = []) => {
                 </div>
                 ${report.photo_path ? `<img src="../${report.photo_path}" alt="Evidence" style="width:100%;height:220px;object-fit:cover;border-radius:12px;margin:1rem 0;">` : ''}
                 <p>${escapeHtml(report.description)}</p>
+                <p><strong>Report ID:</strong> #${report.id}</p>
                 <p><strong>Location:</strong> ${escapeHtml(report.location_text)}</p>
                 <p><strong>Citizen:</strong> ${escapeHtml(report.citizen_name)} (${escapeHtml(report.citizen_email)})</p>
                 <textarea class="form-control" rows="2" data-notes="${report.id}" placeholder="Add moderator notes"></textarea>
@@ -404,6 +405,12 @@ const setupModeratorActions = () => {
                     body: JSON.stringify({ is_valid: isValid, notes })
                 });
                 setAlert(`Report ${isValid ? 'validated' : 'marked invalid'}.`, 'success');
+                if (isValid) {
+                    const assignField = document.getElementById('assign-report-id');
+                    if (assignField) {
+                        assignField.value = reportId;
+                    }
+                }
                 refreshDataByRole();
             } catch (error) {
                 setAlert(error.message, 'error');

@@ -567,7 +567,7 @@ def get_available_tasks():
         FROM reports r
         JOIN tasks t ON r.id = t.report_id
         JOIN users u ON r.citizen_id = u.id
-        WHERE r.status IN ('pending', 'valid')
+        WHERE r.status = 'valid'
         AND t.status = 'pending'
         AND t.assigned_volunteer_id IS NULL
     '''
