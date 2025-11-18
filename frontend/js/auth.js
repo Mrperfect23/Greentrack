@@ -1,4 +1,6 @@
-const API_BASE = '';
+const API_BASE = window.location.port === '8000'
+    ? 'http://127.0.0.1:5000'
+    : '';
 
 const showAlert = (message, type = 'error') => {
     const container = document.getElementById('auth-alert');

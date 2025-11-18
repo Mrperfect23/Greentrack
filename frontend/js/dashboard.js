@@ -1,4 +1,6 @@
-const API_BASE = '';
+const API_BASE = window.location.port === '8000'
+    ? 'http://127.0.0.1:5000'
+    : '';
 
 const state = {
     user: null,
@@ -467,18 +469,6 @@ const initDashboard = async () => {
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof initTheme === 'function') {
         initTheme();
-    }
-
-    const dashToggle = document.getElementById('theme-toggle-dashboard');
-    if (dashToggle) {
-        dashToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-            const next = current === 'dark' ? 'light' : 'dark';
-            localStorage.setItem('greentrack-theme', next);
-            if (typeof applyTheme === 'function') {
-                applyTheme(next);
-            }
-        });
     }
 
     initDashboard();
