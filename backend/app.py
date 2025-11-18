@@ -450,9 +450,11 @@ def get_my_tasks():
     cursor = conn.cursor()
     cursor.execute('''
         SELECT r.*, t.id as task_id, t.status as task_status,
-               t.assigned_at, t.completed_at
+               t.assigned_at, t.completed_at,
+               p.proof_photo_path, p.notes as proof_notes
         FROM reports r
         JOIN tasks t ON r.id = t.report_id
+        LEFT JOIN proofs p ON p.task_id = t.id
         WHERE t.assigned_volunteer_id = ?
         ORDER BY COALESCE(t.assigned_at, r.created_at) DESC
     ''', (session['user_id'],))

@@ -112,27 +112,41 @@ const renderTaskList = (tasks = [], selector, type = 'available') => {
     }
 
     container.innerHTML = tasks
-        .map(task => `
-            <div class="task-card card">
-                <div class="report-header">
-                    <h4>${escapeHtml(task.category)}</h4>
-                    <span class="status-badge status-${(task.task_status || task.status).toLowerCase()}">
-                        ${escapeHtml((task.task_status || task.status).replace('_', ' '))}
-                    </span>
-                </div>
-                <p>${escapeHtml(task.description)}</p>
-                <p><strong>Location:</strong> ${escapeHtml(task.location_text)}</p>
-                <p><strong>Severity:</strong> ${escapeHtml(task.severity || 'n/a')}</p>
-                ${type === 'available'
-                    ? `<button class="btn btn-secondary" data-task-id="${task.task_id}" data-action="claim">Claim Task</button>`
+        .map(task => {
+            const rawStatus = task.task_status || task.status || '';
+            const status = rawStatus.toLowerCase();
+            const statusLabel = rawStatus.replace('_', ' ');
+            const reportPhoto = task.photo_path;
+            const proofPhoto = task.proof_photo_path;
+
+            const actions = type === 'available'
+                ? `<button class="btn btn-secondary" data-task-id="${task.task_id}" data-action="claim">Claim Task</button>`
+                : status === 'completed'
+                    ? '<p style="margin-top:0.75rem;color:var(--muted);">Proof uploaded. This task is completed.</p>'
                     : `
                         <div class="task-actions">
                             <button class="btn btn-primary" data-task-id="${task.task_id}" data-action="start">In Progress</button>
                             <button class="btn btn-outline" data-task-id="${task.task_id}" data-action="complete">Upload Proof</button>
                         </div>
-                    `}
+                    `;
+
+            return `
+            <div class="task-card card">
+                <div class="report-header">
+                    <h4>${escapeHtml(task.category)}</h4>
+                    <span class="status-badge status-${status}">
+                        ${escapeHtml(statusLabel)}
+                    </span>
+                </div>
+                <p>${escapeHtml(task.description)}</p>
+                <p><strong>Location:</strong> ${escapeHtml(task.location_text)}</p>
+                <p><strong>Severity:</strong> ${escapeHtml(task.severity || 'n/a')}</p>
+                ${reportPhoto ? `<p style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">Report photo:</p><img src="../${reportPhoto}" class="photo-thumb" alt="Report photo">` : ''}
+                ${proofPhoto ? `<p style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted);">Proof photo:</p><img src="../${proofPhoto}" class="photo-thumb" alt="Proof photo">` : ''}
+                ${actions}
             </div>
-        `)
+        `;
+        })
         .join('');
 };
 
