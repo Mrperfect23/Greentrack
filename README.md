@@ -81,5 +81,4 @@
 ### dark mode added on dasboard
 ### photos is uploadin in volunteer dasboard 
 ### added reward system git add .
-git commit -m "updated something"
-git push
+### repair submit report in citizen view
